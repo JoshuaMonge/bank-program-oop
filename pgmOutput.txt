@@ -1,0 +1,72 @@
+===== INITIAL ACCOUNT DATABASE =====
+LastName        FirstName       SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Doe             John            123445678    123456     Savings      Open     $    200.55             N/A
+Beam            Jim             234556789    567890     Checking     Open     $   1234.56             N/A
+Eyre            Jane            345667890    987654     Savings      Open     $      2.33             N/A
+Sawyer          Tom             456778901    234567     CD           Open     $    500.00      08/15/2026
+Finn            Huck            567889012    345678     Checking     Open     $    123.98             N/A
+Doe             John            123445678    222222     CD           Open     $   5000.00      12/31/2025
+Doe             John            123445678    333333     Checking     Open     $    999.99             N/A
+Finn            Huck            567889012    654321     Savings      Open     $    543.66             N/A
+Spratt          Jack            678990123    785609     Savings      Open     $    333.33             N/A
+Doe             Jane            456789012    389765     Checking     Open     $    888.56             N/A
+Doe             Jane            456789012    123123     Savings      Open     $   8765.43             N/A
+Smith           Mary            789012345    111111     Checking     Open     $      0.00             N/A
+Johnson         Bob             890123456    222333     Savings      Open     $      0.00             N/A
+====================================================================================================
+Total Accounts: 13 (Open: 13, Closed: 0)
+
+========== ACCOUNT TOTALS BY TYPE ==========
+Total in Savings Accounts:  $    9,845.30
+Total in Checking Accounts: $    3,247.09
+Total in CD Accounts:       $    5,500.00
+                            ---------------
+GRAND TOTAL IN BANK:        $   18,592.39
+============================================
+
+Transaction Requested: Withdrawal
+Accout number: 1000
+Error: Account does not exist
+
+Transaction Requested: Deposit
+Accout number: 123456
+Account type: Savings
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Deposit
+Account Number: 123456
+Account Type: Savings
+Status: SUCCESS
+Transaction Amount: $1000.00
+Old Balance: $200.55
+New Balance: $1200.55
+=========================================
+
+
+===== FINAL ACCOUNT DATABASE =====
+LastName        FirstName       SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Doe             John            123445678    123456     Savings      Open     $   1200.55             N/A
+Beam            Jim             234556789    567890     Checking     Open     $   1234.56             N/A
+Eyre            Jane            345667890    987654     Savings      Open     $      2.33             N/A
+Sawyer          Tom             456778901    234567     CD           Open     $    500.00      08/15/2026
+Finn            Huck            567889012    345678     Checking     Open     $    123.98             N/A
+Doe             John            123445678    222222     CD           Open     $   5000.00      12/31/2025
+Doe             John            123445678    333333     Checking     Open     $    999.99             N/A
+Finn            Huck            567889012    654321     Savings      Open     $    543.66             N/A
+Spratt          Jack            678990123    785609     Savings      Open     $    333.33             N/A
+Doe             Jane            456789012    389765     Checking     Open     $    888.56             N/A
+Doe             Jane            456789012    123123     Savings      Open     $   8765.43             N/A
+Smith           Mary            789012345    111111     Checking     Open     $      0.00             N/A
+Johnson         Bob             890123456    222333     Savings      Open     $      0.00             N/A
+====================================================================================================
+Total Accounts: 13 (Open: 13, Closed: 0)
+
+========== ACCOUNT TOTALS BY TYPE ==========
+Total in Savings Accounts:  $   10,845.30
+Total in Checking Accounts: $    3,247.09
+Total in CD Accounts:       $    5,500.00
+                            ---------------
+GRAND TOTAL IN BANK:        $   19,592.39
+============================================
