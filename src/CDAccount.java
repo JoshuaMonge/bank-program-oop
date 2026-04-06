@@ -2,6 +2,11 @@ import java.util.Calendar;
 
 public class CDAccount extends Account {
     protected Calendar maturityDate;
+
+    // getter
+    public Calendar getMaturityDate() {
+        return maturityDate != null ? (Calendar)maturityDate.clone() : null;
+    }
     /**
      * 
      * @param dep
@@ -9,10 +14,16 @@ public class CDAccount extends Account {
      * @param balance
      * @param date
      */
-    public CDAccount(Depositor dep, int acctNum, String type, double balance, Calendar date) {
-        maturityDate = date;
+    public CDAccount(Depositor dep, int acctNum, double balance, Calendar date) {
         super(dep, acctNum, "CD", balance);
-    } 
+        maturityDate = date;
+    }
+    // copy constructor
+    public CDAccount(CDAccount acct) {
+        super(acct);
+        this.maturityDate = (Calendar) acct.maturityDate.clone();
+    }
+    
     @Override
     /**
      * @param ticket

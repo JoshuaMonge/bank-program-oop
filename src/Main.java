@@ -97,9 +97,8 @@ public class Main {
             double balance = Double.parseDouble(parts[5]);
 
             Depositor depositor = new Depositor(firstName, lastName, ssn);
-            Account account;
             Calendar maturityDate = null;
-
+            
             if (parts.length > 6) {
                 String[] dateParts = parts[6].split("/");
                 int month = Integer.parseInt(dateParts[0]);
@@ -108,11 +107,13 @@ public class Main {
                 maturityDate = Calendar.getInstance();
                 maturityDate.set(year, month - 1, day);
             }
-
-            if (maturityDate != null) {
-                account = new Account(depositor, acctNum, acctType, balance, maturityDate);
+            Account account;
+            if (acctType.equals("Savings")) {
+                account = new SavingsAccount(depositor, acctNum, balance);
+            } else if (acctType.equals("Checking")) {
+                account = new CheckingAccount(depositor, acctNum, balance);
             } else {
-                account = new Account(depositor, acctNum, acctType, balance);
+                account = new CDAccount(depositor, acctNum, balance, maturityDate);
             }
             bank.openNewAcct(account);
         }
@@ -153,8 +154,9 @@ public class Main {
             Depositor depositor = account.getDepostior();
 
             String maturityString = "N/A";
-            if (account.getMaturityDate() != null) {
-                maturityString = formatDate(account.getMaturityDate());
+            if (account instanceof CDAccount) {
+                CDAccount cdAcct = (CDAccount) account; 
+                maturityString = formatDate(cdAcct.getMaturityDate());
             }
             outFile.printf("%-15s %-15s %-12s %-10d %-12s %-8s $%10.2f %15s%n",
                 depositor.getLast(), depositor.getFirst(), depositor.getSSN(),
@@ -241,8 +243,8 @@ public class Main {
         
         TransactionTicket ticket;
 
-        if(account.getAccountType().equals("CD")) {
-            Calendar maturityDate = account.getMaturityDate();
+        if(account instanceof CDAccount CDacct) {
+            Calendar maturityDate = CDacct.getMaturityDate(); // used instanceof pattern 
             outFile.println("Account type: CD");
         
             if (today.before(maturityDate)) {
@@ -296,8 +298,8 @@ public class Main {
         scnr.nextLine();
 
         TransactionTicket ticket;
-        if (account.getAccountType().equals("CD")) {
-            Calendar maturityDate = account.getMaturityDate();
+        if (account instanceof CDAccount CDAcct) {
+            Calendar maturityDate = CDAcct.getMaturityDate();
             outFile.println("Account type: CD");
             outFile.printf("Current balance: $%.2f\n", account.getAccountBalance());
             
@@ -398,20 +400,20 @@ public class Main {
         Depositor dep = new Depositor(firstName, lastName, ssn);
         Account account;
         
-        Calendar maturityDate = null;
         if (accountType.equals("CD")) {
-
             System.out.println("Select CD term: 6, 12, 18, 24");
             System.out.print("Enter term: ");
             int termLength = scnr.nextInt();
             scnr.nextLine();
 
-            maturityDate = Calendar.getInstance();
+            Calendar maturityDate = Calendar.getInstance();
             maturityDate.add(Calendar.MONTH, termLength);
 
-            account = new Account(dep, acctNum, accountType, balance, maturityDate);
+            account = new CDAccount(dep, acctNum, balance, maturityDate);
+        } else if (accountType.equals("Checking")) {
+            account = new CheckingAccount(dep, acctNum, balance);
         } else {
-            account = new Account(dep, acctNum, accountType, balance);
+            account = new SavingsAccount(dep, acctNum, balance);
         }
         TransactionReceipt receipt = bank.openNewAcct(account);
 
@@ -514,8 +516,8 @@ public class Main {
                 Depositor dep = account.getDepostior();
                 String maturityString = "N/A";
 
-                if (account.getMaturityDate() != null) {
-                    maturityString = formatDate(account.getMaturityDate());
+                if (account instanceof CDAccount CDAcct) {
+                    maturityString = formatDate(CDAcct.getMaturityDate());
                 }
                 outFile.printf("%-15s %-15s %-12s %-10d %-12s %-8s $%10.2f %15s%n",
                     dep.getLast(), dep.getFirst(), dep.getSSN(),
@@ -555,8 +557,8 @@ public class Main {
         for (Account account : matchingAccounts) {
             Depositor dep = account.getDepostior();
             String maturityDateString = "N/A";
-            if (account.getMaturityDate() != null) {
-                maturityDateString = formatDate(account.getMaturityDate());
+            if (account instanceof CDAccount CDAcct) {
+                maturityDateString = formatDate(CDAcct.getMaturityDate());
             }
             outFile.printf("%-15s %-15s %-12s %-10s %-12s %-8s %12s %15s%n",
                 "Last Name", "First Name", "SSN", "Acct Num", "Acct Type", "Status", "Balance", "Maturity Date");

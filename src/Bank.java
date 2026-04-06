@@ -73,11 +73,17 @@ public class Bank {
      */
     public ArrayList<Account> getAcctBySSN(String ssn) {
         ArrayList<Account> matchingAccounts = new ArrayList<>();
-        for (Account account : this.accounts) {
+        for (Account account : accounts) {
             if (account.getDepostior().getSSN().equals(ssn)) {
-                matchingAccounts.add(new Account(account));
+                if (account instanceof CDAccount CDAcct) {
+                    matchingAccounts.add(new CDAccount(CDAcct));
+                } else if (account instanceof CheckingAccount CKAcct) {
+                    matchingAccounts.add(new CheckingAccount(CKAcct));
+                } else if (account instanceof SavingsAccount SVAcct) {
+                    matchingAccounts.add(new SavingsAccount(SVAcct));
+                }
             }
-        }
+        }  
         return matchingAccounts;
     }
     /**
@@ -87,7 +93,15 @@ public class Bank {
      */
     public Account getAcct(int index) {
         if (index >= 0 && index < accounts.size()) {
-            return new Account(accounts.get(index));
+            if (accounts.get(index) instanceof CDAccount CDAcct) {
+                return new CDAccount(CDAcct);
+            }
+            else if (accounts.get(index) instanceof CheckingAccount CKAcct) {
+                return new CheckingAccount(CKAcct);
+            } else {
+                SavingsAccount SVAcct = (SavingsAccount) accounts.get(index);
+                return new SavingsAccount(SVAcct);
+            }
         }
         return null;
     }
@@ -152,8 +166,9 @@ public class Bank {
             addToCDTotal(balance);
         }
         TransactionReceipt receipt;
-        if (type.equals("CD")) {
-            Calendar maturityDate = newAcct.getMaturityDate();
+        if (newAcct instanceof CDAccount) {
+            CDAccount cdAcct = (CDAccount) newAcct;
+            Calendar maturityDate = cdAcct.getMaturityDate();
             receipt =  new TransactionReceipt(ticket, true, type, 0.0, balance, maturityDate);
         } else {
             receipt = new TransactionReceipt(ticket, true, type, 0.0, balance);

@@ -104,24 +104,6 @@ public class Account {
             addTransaction(receipt);
             return receipt;
         }
-        // STRIPPING CD LOGIC
-        // if (accountType.equals("CD")) {
-        //     Calendar transactionDate = Calendar.getInstance();
-        //     if (transactionDate.before(maturityDate)) {
-        //         String maturityDateString = formatDate(maturityDate);
-        //         receipt = new TransactionReceipt(ticket, false, ("CD maturity date " + maturityDateString + " not reached"), accountType, accountBalance);
-        //         addTransaction(receipt);                
-        //         return receipt;
-        //     }
-        //     int term = ticket.getTermOfCD();
-        //     Calendar newMaturityDate = Calendar.getInstance();
-        //     newMaturityDate.add(Calendar.MONTH, term);
-            
-        //     accountBalance += depositAmount;
-        //     receipt = new TransactionReceipt(ticket, true, accountType, oldBalance, accountBalance, newMaturityDate);
-        //     addTransaction(receipt);
-        //     return receipt;
-        // }
         accountBalance += depositAmount;
         receipt = new TransactionReceipt(ticket, true, accountType, oldBalance, accountBalance);
         addTransaction(receipt);
@@ -147,25 +129,6 @@ public class Account {
             addTransaction(receipt);
             return receipt;
         }
-        // if (accountType.equals("CD")) {
-        //     Calendar transactionDate = Calendar.getInstance();
-        //     if (transactionDate.before(maturityDate)) {
-        //         String maturityDateString = formatDate(maturityDate);
-        //         receipt = new TransactionReceipt(ticket, false, ("CD maturity date " + maturityDateString + " not reached"), accountType, accountBalance);
-        //         addTransaction(receipt);                
-        //         return receipt;
-        //     }
-        //     int term = ticket.getTermOfCD();
-        //     Calendar newMaturityDate = Calendar.getInstance();
-        //     newMaturityDate.add(Calendar.MONTH, term);
-            
-        //     accountBalance -= withdrawalAmount;
-        //     receipt = new TransactionReceipt(ticket, true, accountType, oldBalance, accountBalance, newMaturityDate);
-        //     addTransaction(receipt);
-        //     return receipt;
-            
-        // }
-        // validation specific to withdrawal method
         if (withdrawalAmount > accountBalance) {
             receipt = new TransactionReceipt(ticket, false, "Insufficient funds available", accountType, accountBalance);
             addTransaction(receipt);
@@ -192,11 +155,6 @@ public class Account {
         
         if (accountStatus.equals("Closed")) {
             receipt = new TransactionReceipt(ticket, false, "Account is closed - No transaction allowed", accountType, accountBalance);
-            addTransaction(receipt);
-            return receipt;
-        }
-        if (!accountType.equals("Checking")) {
-            receipt = new TransactionReceipt(ticket, false, "Check not cleared - Account type must be Checking", accountType, accountBalance);
             addTransaction(receipt);
             return receipt;
         }
