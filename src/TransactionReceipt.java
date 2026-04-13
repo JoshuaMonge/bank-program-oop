@@ -1,7 +1,7 @@
 
 import java.util.Calendar;
 
-public class TransactionReceipt {
+public class TransactionReceipt extends genTransactionReceipt{
     private TransactionTicket ticket;
     private boolean successIndicatorFlag;
     private String reasonForFailure;
@@ -122,6 +122,28 @@ public class TransactionReceipt {
         postTransactionBalance = receipt.postTransactionBalance;
         postTransactionMaturityDate = (receipt.postTransactionMaturityDate != null) ? (Calendar) 
             receipt.postTransactionMaturityDate.clone() : null; // checking if there is maturity date to begin with
+    }
+    //setters
+    public void setTransactionTicket(TransactionTicket ticket) {
+        this.ticket = ticket;
+    }
+    public void setSuccessIndicatorFlag(boolean e) {
+        successIndicatorFlag = e;
+    }
+    public void setReasonForFailure(String reason) {
+        reasonForFailure = reason;
+    }
+    public void setAccountType(String type) {
+        accountType = type;
+    }
+    public void setPreTransactionBalance(double balance) {
+        preTransactionBalance = balance;
+    }
+    public void setPostTransactionBalance(double balance) {
+        postTransactionBalance = balance;
+    }
+    public void setPostTransactionMaturityDate(Calendar date) {
+        postTransactionMaturityDate = date;
     }
     // getters
     public TransactionTicket getTransactionTicket() {

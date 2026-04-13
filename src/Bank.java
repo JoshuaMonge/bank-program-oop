@@ -74,7 +74,7 @@ public class Bank {
     public ArrayList<Account> getAcctBySSN(String ssn) {
         ArrayList<Account> matchingAccounts = new ArrayList<>();
         for (Account account : accounts) {
-            if (account.getDepostior().getSSN().equals(ssn)) {
+            if (account.getDepositor().getSSN().equals(ssn)) {
                 if (account instanceof CDAccount CDAcct) {
                     matchingAccounts.add(new CDAccount(CDAcct));
                 } else if (account instanceof CheckingAccount CKAcct) {
@@ -256,21 +256,19 @@ public class Bank {
         Calendar todaysDate = Calendar.getInstance();
         int index = findAcct(acctNum);
         TransactionTicket ticket = new TransactionTicket(acctNum, todaysDate, "Clear Check");
+        TransactionReceipt receipt;
         if (index == -1) {
             return new TransactionReceipt(ticket, false, ("Account number " + acctNum + " not exist"), "", 0.0);
         }
         double oldBalance = accounts.get(index).getAccountBalance();
-        String type = accounts.get(index).getAccountType();
-
-        TransactionReceipt receipt = accounts.get(index).clearCheck(check);
-
-        double newBalance = accounts.get(index).getAccountBalance();
-        double difference  = oldBalance - newBalance;
-        
-        if (difference > 0) {
-            if (type.equals("Checking")) {
+        if (accounts.get(index) instanceof CheckingAccount CKAcct){
+            receipt = CKAcct.clearCheck(check);
+            double newBalance = accounts.get(index).getAccountBalance();
+            double difference  = oldBalance - newBalance;
+            if (difference > 0)
                 subtractFromCheckingTotal(difference);
-            }
+            } else {
+            receipt = new TransactionReceipt(ticket, false, "Account is not a Checking account", "", 0.0);
         }
         return receipt;
     }

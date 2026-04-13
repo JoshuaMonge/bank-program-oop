@@ -4,9 +4,9 @@ LastName        FirstName       SSN          Acct Num   Acct Type    Status     
 Doe             John            123445678    123456     Savings      Open     $    200.55             N/A
 Beam            Jim             234556789    567890     Checking     Open     $   1234.56             N/A
 Eyre            Jane            345667890    987654     Savings      Open     $      2.33             N/A
-Sawyer          Tom             456778901    234567     CD           Open     $    500.00      08/15/2026
+Sawyer          Tom             456778901    234567     Savings      Open     $    500.00      08/15/2026
 Finn            Huck            567889012    345678     Checking     Open     $    123.98             N/A
-Doe             John            123445678    222222     CD           Open     $   5000.00      12/31/2025
+Doe             John            123445678    222222     Savings      Open     $   5000.00      12/31/2025
 Doe             John            123445678    333333     Checking     Open     $    999.99             N/A
 Finn            Huck            567889012    654321     Savings      Open     $    543.66             N/A
 Spratt          Jack            678990123    785609     Savings      Open     $    333.33             N/A
@@ -18,16 +18,102 @@ Johnson         Bob             890123456    222333     Savings      Open     $ 
 Total Accounts: 13 (Open: 13, Closed: 0)
 
 ========== ACCOUNT TOTALS BY TYPE ==========
-Total in Savings Accounts:  $    9,845.30
+Total in Savings Accounts:  $   15,345.30
 Total in Checking Accounts: $    3,247.09
-Total in CD Accounts:       $    5,500.00
+Total in CD Accounts:       $        0.00
                             ---------------
 GRAND TOTAL IN BANK:        $   18,592.39
 ============================================
 
 Transaction Requested: Withdrawal
-Accout number: 1000
+Accout number: 567890
+Account type: Checking
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Withdrawal
+Account Number: 567890
+Account Type: Checking
+Status: SUCCESS
+Transaction Amount: $100.00
+Old Balance: $1234.56
+New Balance: $1133.06
+=========================================
+
+Transaction Requested: Balance Inquiry
+Account number: 567890
+========== TRANSACTION RECEIPT ==========
+Transaction: Balance Inquiry
+Account Number: 567890
+Account Type: Checking
+Status: SUCCESS
+Old Balance: $1133.06
+New Balance: $1133.06
+=========================================
+
+Transaction Requested: Withdrawal
+Accout number: 567890
+Account type: Checking
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Withdrawal
+Account Number: 567890
+Account Type: Checking
+Status: FAILED
+Reason: Insufficient funds available
+Current Balance: $1133.06
+=========================================
+
+Transaction Requested: Withdrawal
+Accout number: 234567
+Account type: CD
+Current balance: $500.00
+Error: CD maturity date 08/15/2026 not reached
+
+Transaction Requested: Withdrawal
+Accout number: 222222
+Account type: CD
+Current balance: $5000.00
+Account type: Savings
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Withdrawal
+Account Number: 222222
+Account Type: Savings
+Status: SUCCESS
+Transaction Amount: $100.00
+Old Balance: $5000.00
+New Balance: $4900.00
+=========================================
+
+Transaction Requested: Withdrawal
+Accout number: 987654
+Account type: Savings
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Withdrawal
+Account Number: 987654
+Account Type: Savings
+Status: FAILED
+Reason: Insufficient funds available
+Current Balance: $2.33
+=========================================
+
+Transaction Requested: Withdrawal
+Accout number: 999999
 Error: Account does not exist
+
+Transaction Requested: Withdrawal
+Accout number: 123456
+Account type: Savings
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Withdrawal
+Account Number: 123456
+Account Type: Savings
+Status: FAILED
+Reason: Withdrawal amount $-50.00 must be greater than 0
+Current Balance: $200.55
+=========================================
 
 Transaction Requested: Deposit
 Accout number: 123456
@@ -38,35 +124,594 @@ Transaction: Deposit
 Account Number: 123456
 Account Type: Savings
 Status: SUCCESS
-Transaction Amount: $1000.00
+Transaction Amount: $100.25
 Old Balance: $200.55
-New Balance: $1200.55
+New Balance: $300.80
+=========================================
+
+Transaction Requested: Deposit
+Accout number: 987654
+Account type: Savings
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Deposit
+Account Number: 987654
+Account Type: Savings
+Status: SUCCESS
+Transaction Amount: $50.00
+Old Balance: $2.33
+New Balance: $52.33
+=========================================
+
+Transaction Requested: Deposit
+Accout number: 234567
+Account type: CD
+Error: CD maturity date 08/15/2026 not reached
+
+Transaction Requested: Deposit
+Accout number: 222222
+Account type: CD
+Error: CD maturity date 10/12/2026 not reached
+
+Transaction Requested: Deposit
+Accout number: 567890
+Account type: Checking
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Deposit
+Account Number: 567890
+Account Type: Checking
+Status: SUCCESS
+Transaction Amount: $500.00
+Old Balance: $1133.06
+New Balance: $1633.06
+=========================================
+
+Transaction Requested: Deposit
+Accout number: 999999
+Error: Account does not exist
+
+Transaction Requested: Deposit
+Accout number: 123456
+Account type: Savings
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Deposit
+Account Number: 123456
+Account Type: Savings
+Status: FAILED
+Reason: Deposit amount $-75.00 must be greater than 0
+Current Balance: $300.80
+=========================================
+
+Transaction Requested: Clear Check
+Account Number: 567890
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Clear check
+Account Number: 567890
+Account Type: Checking
+Status: SUCCESS
+Transaction Amount: $10.50
+Old Balance: $1633.06
+New Balance: $1621.06
+=========================================
+
+Transaction Requested: Clear Check
+Account Number: 567890
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Clear check
+Account Number: 567890
+Account Type: Checking
+Status: FAILED
+Reason: Check not cleared - Insufficient Funds ($2.50 Bounce Fee Incurred)
+Current Balance: $1618.56
+=========================================
+
+Transaction Requested: Clear Check
+Account Number: 567890
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Clear check
+Account Number: 567890
+Account Type: Checking
+Status: FAILED
+Reason: Check not cleared - Post-dated check: 04/15/2026
+Current Balance: $1618.56
+=========================================
+
+Transaction Requested: Clear Check
+Account Number: 567890
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Clear check
+Account Number: 567890
+Account Type: Checking
+Status: FAILED
+Reason: Check not cleared - Check is too old (10/08/2025)
+Current Balance: $1618.56
+=========================================
+
+Transaction Requested: Clear Check
+Account Number: 123456
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Clear Check
+Account Number: 123456
+Account Type: 
+Status: FAILED
+Reason: Account is not a Checking account
+Current Balance: $0.00
+=========================================
+
+Transaction Requested: Clear Check
+Account Number: 999999
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Clear Check
+Account Number: 999999
+Account Type: 
+Status: FAILED
+Reason: Account number 999999 not exist
+Current Balance: $0.00
+=========================================
+
+Transaction Requested: New Account
+Account number: 555555
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Open Account
+Account Number: 555555
+Account Type: Checking
+Status: SUCCESS
+Old Balance: $0.00
+New Balance: $1000.00
+=========================================
+
+Transaction Requested: New Account
+Account number: 666666
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Open Account
+Account Number: 666666
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $0.00
+New Balance: $1234.56
+New Maturity Date: 10/12/2026
+=========================================
+
+Transaction Requested: New Account
+Account number: 777777
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Open Account
+Account Number: 777777
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $0.00
+New Balance: $500.00
+=========================================
+
+Transaction Requested: New Account
+Account number: 123456
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Open Account
+Account Number: 123456
+Account Type: Savings
+Status: FAILED
+Reason: Account number already exists
+Current Balance: $0.00
+=========================================
+
+Transaction Requested: Balance Inquiry
+Account number: 123456
+========== TRANSACTION RECEIPT ==========
+Transaction: Balance Inquiry
+Account Number: 123456
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $300.80
+New Balance: $300.80
+=========================================
+
+Transaction Requested: Balance Inquiry
+Account number: 555555
+========== TRANSACTION RECEIPT ==========
+Transaction: Balance Inquiry
+Account Number: 555555
+Account Type: Checking
+Status: SUCCESS
+Old Balance: $1000.00
+New Balance: $1000.00
+=========================================
+
+Transaction Requested: Balance Inquiry
+Account number: 666666
+========== TRANSACTION RECEIPT ==========
+Transaction: Balance Inquiry
+Account Number: 666666
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $1234.56
+New Balance: $1234.56
+=========================================
+
+Transaction Requested: Balance Inquiry
+Account number: 222222
+========== TRANSACTION RECEIPT ==========
+Transaction: Balance Inquiry
+Account Number: 222222
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $4900.00
+New Balance: $4900.00
+=========================================
+
+Transaction Requested: Balance Inquiry
+Account number: 999999
+========== TRANSACTION RECEIPT ==========
+Transaction: Balance Inquiry
+Account Number: 999999
+Account Type: 
+Status: FAILED
+Reason: Account number 999999 not exist
+Current Balance: $0.00
+=========================================
+
+Transaction Requested: Account Info
+SSN: 123445678
+Last Name       First Name      SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Doe             John            123445678    123456     Savings      Open     $    300.80             N/A
+Doe             John            123445678    222222     Savings      Open     $   4900.00      10/12/2026
+Doe             John            123445678    333333     Checking     Open     $    999.99             N/A
+3 account(s) were found
+
+Transaction Requested: Account Info
+SSN: 111222333
+Last Name       First Name      SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Connor          Sarah           111222333    555555     Checking     Open     $   1000.00             N/A
+1 account(s) were found
+
+Transaction Requested: Account Info
+SSN: 444555666
+Last Name       First Name      SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Reese           Kyle            444555666    666666     Savings      Open     $   1234.56      10/12/2026
+1 account(s) were found
+
+Transaction Requested: Account Info
+SSN: 999999999
+Error: No accounts found for SSN
+
+Transaction Requested: Account Info History
+SSN: 123445678
+Last Name       First Name      SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Doe             John            123445678    123456     Savings      Open     $    300.80             N/A
+***** Account Transactions *****
+Date         Transaction                   Amount Status      Balance Reason For Failure                                
+04/12/2026   Open Account              $     0.00 Done     $   200.55                                                   
+04/12/2026   Withdrawal                $   -50.00 Failed   $   200.55 Withdrawal amount $-50.00 must be greater than 0  
+04/12/2026   Deposit                   $   100.25 Done     $   300.80                                                   
+04/12/2026   Deposit                   $   -75.00 Failed   $   300.80 Deposit amount $-75.00 must be greater than 0     
+04/12/2026   Balance Inquiry           $     0.00 Done     $   300.80                                                   
+
+Last Name       First Name      SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Doe             John            123445678    222222     Savings      Open     $   4900.00      10/12/2026
+***** Account Transactions *****
+Date         Transaction                   Amount Status      Balance Reason For Failure                                
+04/12/2026   Open Account              $     0.00 Done     $  5000.00                                                   
+04/12/2026   Withdrawal                $   100.00 Done     $  4900.00                                                   
+04/12/2026   Balance Inquiry           $     0.00 Done     $  4900.00                                                   
+
+Last Name       First Name      SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Doe             John            123445678    333333     Checking     Open     $    999.99             N/A
+***** Account Transactions *****
+Date         Transaction                   Amount Status      Balance Reason For Failure                                
+04/12/2026   Open Account              $     0.00 Done     $   999.99                                                   
+
+3 account(s) were found
+
+Transaction Requested: Account Info History
+SSN: 111222333
+Last Name       First Name      SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
+====================================================================================================
+Connor          Sarah           111222333    555555     Checking     Open     $   1000.00             N/A
+***** Account Transactions *****
+Date         Transaction                   Amount Status      Balance Reason For Failure                                
+04/12/2026   Open Account              $     0.00 Done     $  1000.00                                                   
+04/12/2026   Balance Inquiry           $     0.00 Done     $  1000.00                                                   
+
+1 account(s) were found
+
+Transaction requested: Close Account
+Account number: 123456
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Close account
+Account Number: 123456
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $300.80
+New Balance: $300.80
+=========================================
+
+Transaction requested: Close Account
+Account number: 555555
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Close account
+Account Number: 555555
+Account Type: Checking
+Status: SUCCESS
+Old Balance: $1000.00
+New Balance: $1000.00
+=========================================
+
+Transaction requested: Close Account
+Account number: 666666
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Close account
+Account Number: 666666
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $1234.56
+New Balance: $1234.56
+=========================================
+
+Transaction requested: Close Account
+Account number: 222222
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Close account
+Account Number: 222222
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $4900.00
+New Balance: $4900.00
+=========================================
+
+Transaction requested: Close Account
+Account number: 999999
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Close account
+Account Number: 999999
+Account Type: 
+Status: FAILED
+Reason: Account number 999999 not exist
+Current Balance: $0.00
+=========================================
+
+Transaction requested: Close Account
+Account number: 123456
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Close account
+Account Number: 123456
+Account Type: Account is already closed
+Status: FAILED
+Reason: null
+Current Balance: $300.80
+=========================================
+
+Transaction requested: Reopen Account
+Account number: 123456
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Reopen Account
+Account Number: 123456
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $300.80
+New Balance: $300.80
+=========================================
+
+Transaction requested: Reopen Account
+Account number: 555555
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Reopen Account
+Account Number: 555555
+Account Type: Checking
+Status: SUCCESS
+Old Balance: $1000.00
+New Balance: $1000.00
+=========================================
+
+Transaction requested: Reopen Account
+Account number: 666666
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Reopen Account
+Account Number: 666666
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $1234.56
+New Balance: $1234.56
+=========================================
+
+Transaction requested: Reopen Account
+Account number: 222222
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Reopen Account
+Account Number: 222222
+Account Type: Savings
+Status: SUCCESS
+Old Balance: $4900.00
+New Balance: $4900.00
+=========================================
+
+Transaction requested: Reopen Account
+Account number: 999999
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Reopen Account
+Account Number: 999999
+Account Type: 
+Status: FAILED
+Reason: Account number 999999 not exist
+Current Balance: $0.00
+=========================================
+
+Transaction requested: Reopen Account
+Account number: 123456
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Reopen Account
+Account Number: 123456
+Account Type: Account is already open
+Status: FAILED
+Reason: null
+Current Balance: $300.80
+=========================================
+
+Transaction requested: Delete Account
+Account number: 333333
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Delete Account
+Account Number: 333333
+Account Type: Checking
+Status: FAILED
+Reason: Account not deleted - Account has a non-zero balance ($999.99)
+Current Balance: $999.99
+=========================================
+
+Transaction Requested: Withdrawal
+Accout number: 333333
+Account type: Checking
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Withdrawal
+Account Number: 333333
+Account Type: Checking
+Status: SUCCESS
+Transaction Amount: $999.99
+Old Balance: $999.99
+New Balance: $-1.50
+=========================================
+
+Transaction requested: Delete Account
+Account number: 333333
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Delete Account
+Account Number: 333333
+Account Type: Checking
+Status: FAILED
+Reason: Account not deleted - Account has a non-zero balance ($-1.50)
+Current Balance: $-1.50
+=========================================
+
+Transaction requested: Delete Account
+Account number: 111111
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Delete Account
+Account Number: 111111
+Account Type: 
+Status: SUCCESS
+Old Balance: $0.00
+New Balance: $0.00
+=========================================
+
+Transaction requested: Delete Account
+Account number: 222333
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Delete Account
+Account Number: 222333
+Account Type: 
+Status: SUCCESS
+Old Balance: $0.00
+New Balance: $0.00
+=========================================
+
+Transaction requested: Delete Account
+Account number: 555555
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Delete Account
+Account Number: 555555
+Account Type: Checking
+Status: FAILED
+Reason: Account not deleted - Account has a non-zero balance ($1000.00)
+Current Balance: $1000.00
+=========================================
+
+Transaction Requested: Withdrawal
+Accout number: 555555
+Account type: Checking
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Withdrawal
+Account Number: 555555
+Account Type: Checking
+Status: SUCCESS
+Transaction Amount: $1000.00
+Old Balance: $1000.00
+New Balance: $-1.50
+=========================================
+
+Transaction requested: Delete Account
+Account number: 555555
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Delete Account
+Account Number: 555555
+Account Type: Checking
+Status: FAILED
+Reason: Account not deleted - Account has a non-zero balance ($-1.50)
+Current Balance: $-1.50
+=========================================
+
+Transaction requested: Delete Account
+Account number: 999999
+
+========== TRANSACTION RECEIPT ==========
+Transaction: Delete Account
+Account Number: 999999
+Account Type: 
+Status: FAILED
+Reason: Account number 999999 not exist
+Current Balance: $0.00
 =========================================
 
 
 ===== FINAL ACCOUNT DATABASE =====
 LastName        FirstName       SSN          Acct Num   Acct Type    Status        Balance   Maturity Date
 ====================================================================================================
-Doe             John            123445678    123456     Savings      Open     $   1200.55             N/A
-Beam            Jim             234556789    567890     Checking     Open     $   1234.56             N/A
-Eyre            Jane            345667890    987654     Savings      Open     $      2.33             N/A
-Sawyer          Tom             456778901    234567     CD           Open     $    500.00      08/15/2026
+Doe             John            123445678    123456     Savings      Open     $    300.80             N/A
+Beam            Jim             234556789    567890     Checking     Open     $   1618.56             N/A
+Eyre            Jane            345667890    987654     Savings      Open     $     52.33             N/A
+Sawyer          Tom             456778901    234567     Savings      Open     $    500.00      08/15/2026
 Finn            Huck            567889012    345678     Checking     Open     $    123.98             N/A
-Doe             John            123445678    222222     CD           Open     $   5000.00      12/31/2025
-Doe             John            123445678    333333     Checking     Open     $    999.99             N/A
+Doe             John            123445678    222222     Savings      Open     $   4900.00      10/12/2026
+Doe             John            123445678    333333     Checking     Open     $     -1.50             N/A
 Finn            Huck            567889012    654321     Savings      Open     $    543.66             N/A
 Spratt          Jack            678990123    785609     Savings      Open     $    333.33             N/A
 Doe             Jane            456789012    389765     Checking     Open     $    888.56             N/A
 Doe             Jane            456789012    123123     Savings      Open     $   8765.43             N/A
-Smith           Mary            789012345    111111     Checking     Open     $      0.00             N/A
-Johnson         Bob             890123456    222333     Savings      Open     $      0.00             N/A
+Connor          Sarah           111222333    555555     Checking     Open     $     -1.50             N/A
+Reese           Kyle            444555666    666666     Savings      Open     $   1234.56      10/12/2026
+Smith           John            555666777    777777     Savings      Open     $    500.00             N/A
 ====================================================================================================
-Total Accounts: 13 (Open: 13, Closed: 0)
+Total Accounts: 14 (Open: 14, Closed: 0)
 
 ========== ACCOUNT TOTALS BY TYPE ==========
-Total in Savings Accounts:  $   10,845.30
-Total in Checking Accounts: $    3,247.09
-Total in CD Accounts:       $    5,500.00
+Total in Savings Accounts:  $   17,130.11
+Total in Checking Accounts: $    2,628.10
+Total in CD Accounts:       $        0.00
                             ---------------
-GRAND TOTAL IN BANK:        $   19,592.39
+GRAND TOTAL IN BANK:        $   19,758.21
 ============================================

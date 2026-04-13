@@ -1,4 +1,4 @@
-public class Depositor {
+public class Depositor extends genDepositor {
     private Name name;
     private String socialSecutiryNumber;
 
@@ -27,6 +27,16 @@ public class Depositor {
     }
     public String getSSN() {
         return socialSecutiryNumber;
+    }
+    //setters
+    public void setFirst(String firstName) {
+        name.setFirst(firstName);
+    }
+    public void setLast(String lastName) {
+        name.setLast(lastName);
+    }
+    public void setSSN(String SSN) {
+        socialSecutiryNumber = SSN;
     }
     // toString method
     @Override

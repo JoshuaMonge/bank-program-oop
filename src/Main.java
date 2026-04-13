@@ -151,7 +151,7 @@ public class Main {
         
         for (int i = 0; i < bank.getNumTotalAccts(); i++) {
             Account account = bank.getAcct(i);
-            Depositor depositor = account.getDepostior();
+            Depositor depositor = account.getDepositor();
 
             String maturityString = "N/A";
             if (account instanceof CDAccount) {
@@ -513,7 +513,7 @@ public class Main {
             System.out.println("====================================================================================================");
             
             for (Account account : matchingAccounts) {
-                Depositor dep = account.getDepostior();
+                Depositor dep = account.getDepositor();
                 String maturityString = "N/A";
 
                 if (account instanceof CDAccount CDAcct) {
@@ -555,7 +555,7 @@ public class Main {
         }
 
         for (Account account : matchingAccounts) {
-            Depositor dep = account.getDepostior();
+            Depositor dep = account.getDepositor();
             String maturityDateString = "N/A";
             if (account instanceof CDAccount CDAcct) {
                 maturityDateString = formatDate(CDAcct.getMaturityDate());

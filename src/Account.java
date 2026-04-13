@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Account {
+public class Account extends genAccount {
     private Depositor depositor;
     private int accountNumber;
     private String accountType;
-    private String accountStatus; // "Open", "Closed"
+    protected String accountStatus; // "Open", "Closed"
     protected double accountBalance;
     private ArrayList<TransactionReceipt> receipts; // transaction history
 
@@ -59,7 +59,7 @@ public class Account {
         return copy;
     }
 
-    public Depositor getDepostior() {
+    public Depositor getDepositor() {
         return new Depositor(depositor);
     }
     public int getAccountNumber() {
@@ -73,6 +73,22 @@ public class Account {
     }
     public double getAccountBalance() {
         return accountBalance;
+    }
+    //setters
+    public void setDepositor(Depositor dep) {
+        this.depositor = dep;
+    } 
+    public void setAccountNumber(int acctNum) {
+        accountNumber = acctNum;
+    }
+    public void setAccountType(String type) {
+        accountType = type;
+    }
+    public void setAcctStatus (String status) {
+        accountStatus = status;
+    }
+    public void setAccountBalance(double bal) {
+        accountBalance = bal;
     }
 
     
@@ -139,51 +155,6 @@ public class Account {
         addTransaction(receipt);
         return receipt;
     }  
-    /**
-     * 
-     * @param check
-     * @return
-     */
-    public TransactionReceipt clearCheck(Check check) {
-        int acctNum = check.getAccountNumber();
-        Calendar todaysDate = Calendar.getInstance();
-        Calendar dateOfCheck = check.getDateOfCheck();
-        double amount = check.getCheckAmount();
-        TransactionReceipt receipt;
-        double oldBalance = accountBalance;
-        TransactionTicket ticket = new TransactionTicket(acctNum, todaysDate, "Clear check", amount);
-        
-        if (accountStatus.equals("Closed")) {
-            receipt = new TransactionReceipt(ticket, false, "Account is closed - No transaction allowed", accountType, accountBalance);
-            addTransaction(receipt);
-            return receipt;
-        }
-        if (dateOfCheck.after(todaysDate)) {
-            String checkDateString = formatDate(dateOfCheck);
-            receipt = new TransactionReceipt(ticket, false, String.format("Check not cleared - Post-dated check: %s", checkDateString), accountType, accountBalance);
-            addTransaction(receipt);
-            return receipt;
-        }
-        Calendar sixMonthsAgo = Calendar.getInstance();
-        sixMonthsAgo.add(Calendar.MONTH, -6);
-        if (dateOfCheck.before(sixMonthsAgo)) {
-            String checkDateString = formatDate(dateOfCheck);
-            receipt = new TransactionReceipt(ticket, false, String.format("Check not cleared - Check is too old (%s)", checkDateString), accountType, accountBalance);
-            addTransaction(receipt);
-            return receipt;
-        }
-        if (amount > accountBalance) {
-            oldBalance = accountBalance;
-            accountBalance -= BOUNCE_FEE;
-            receipt = new TransactionReceipt(ticket, false, "Check not cleared - Insufficient Funds ($2.50 Bounce Fee Incurred)", accountType, oldBalance, accountBalance);
-            addTransaction(receipt);
-            return receipt;
-        }
-        accountBalance -= amount;
-        receipt = new TransactionReceipt(ticket, true, accountType, oldBalance, accountBalance);
-        addTransaction(receipt);
-        return receipt;
-    }
     /**
      * 
      * @param ticket

@@ -1,7 +1,7 @@
 
 import java.util.Calendar;
 
-public class TransactionTicket {
+public class TransactionTicket extends genTransactionTicket {
     private int accountNumber;
     private Calendar dateOfTransaction;
     private String typeOfTransaction;
@@ -95,6 +95,23 @@ public class TransactionTicket {
     public int getTermOfCD() {
         return termOfCD;
     }
+    //setters
+    public void setAccountNumber(int acctNum) {
+        accountNumber = acctNum;
+    }
+    public void setDateOfTransaction(Calendar date) {
+        dateOfTransaction = date;
+    }
+    public void setTypeOfTransaction(String type) {
+        typeOfTransaction = type;
+    }
+    public void setAmountOfTransaction(double amount) {
+        amountOfTransaction = amount;
+    }
+    public void setTermOfCD(int term) {
+        termOfCD = term;
+}
+
     @Override
     public String toString() {
         if (termOfCD > 0) {

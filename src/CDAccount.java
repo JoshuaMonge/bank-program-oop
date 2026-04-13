@@ -1,6 +1,6 @@
 import java.util.Calendar;
 
-public class CDAccount extends Account {
+public class CDAccount extends SavingsAccount {
     protected Calendar maturityDate;
 
     // getter
@@ -15,7 +15,7 @@ public class CDAccount extends Account {
      * @param date
      */
     public CDAccount(Depositor dep, int acctNum, double balance, Calendar date) {
-        super(dep, acctNum, "CD", balance);
+        super(dep, acctNum, balance);
         maturityDate = date;
     }
     // copy constructor

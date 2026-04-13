@@ -1,4 +1,4 @@
-public class Name {
+public class Name extends genName {
     private String firstName;
     private String lastName;
 
